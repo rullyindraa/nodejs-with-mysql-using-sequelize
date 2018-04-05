@@ -2,3 +2,6 @@ node_modules
 config
 students.sql
 sendgrid.env
+.DS_Store
+views/.DS_Store
+public/.DS_Store
