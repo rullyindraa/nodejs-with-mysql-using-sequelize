@@ -1,0 +1,74 @@
+doctype html
+html(lang='en')
+
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js')
+    link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')
+
+    script.
+      (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+          var forms = document.getElementsByClassName('needs-validation');
+          var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+              if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add('was-validated');
+            }, false);
+          });
+        }, false);
+      })();
+
+    title Student Database
+
+  body#page-top.fixed-nav.sticky-footer
+    include includes/navbar.pug
+    .content-wrapper
+      .container
+        // Breadcrumbs
+        ol.breadcrumb
+          li.breadcrumb-item
+            a(href='/') Dashboard
+          li.breadcrumb-item.active Input New User
+        .card.mb-3
+          .card-header
+            i.fa.fa-check-square-o
+            |  Input New User
+          .card-body
+            form.needs-validation(action='/users/input', method='POST', novalidate='')
+              .row.form-group
+                .col-4
+                  label(for='email') Email:
+                .col-6
+                  input.form-control(type='email', name='email', placeholder='Input Email', required='')
+                  .invalid-feedback
+                    | Please enter a valid email
+                  if messages.error
+                    .p(style='font-size: 13px; margin-left: 5px; margin-top: 5px; color: red')
+                      div= messages.error
+              .row.form-group
+                .col-4
+                  label(for='username') Username:
+                .col-6
+                  input.form-control(type='text', name='username', placeholder='Input Username', required='')
+                  .invalid-feedback
+                    | Please enter your username
+              .row.form-group
+                .col-4
+                  label(for='password') Password:
+                .col-6
+                  input.form-control(type='password', name='password', placeholder='Input Password', required='')
+                  .invalid-feedback
+                    | Please enter your password
+              input.btn.btn-primary(type='submit', value='Submit')

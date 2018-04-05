@@ -1,0 +1,20 @@
+nav.navbar.navbar-expand-lg.bg-dark.navbar-dark(style= 'margin-bottom: 30px;')
+  a.navbar-brand(href='#')
+  ul.navbar-nav
+    li.nav-item
+      a.nav-link(href='/') Dashboard
+    li.nav-item
+      a.nav-link(href='/students/statistics?year=2018') Statistics
+    li.nav-item.dropdown
+      a#navbardrop.nav-link.dropdown-toggle(href='#', data-toggle='dropdown')
+        | Students
+      .dropdown-menu
+        a.dropdown-item(href='/students') Students List
+        a.dropdown-item(href='/students/input') Input New Student
+    li.nav-item.dropdown
+      a#navbardrop.nav-link.dropdown-toggle(href='#', data-toggle='dropdown')
+        | Users
+      .dropdown-menu
+        a.dropdown-item(href='/users/input') Input New User
+    li.nav-item
+      a.nav-link(href='/logout') Logout

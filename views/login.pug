@@ -1,0 +1,45 @@
+doctype html
+html(lang='en')
+  head
+    title Sign in to Student Database
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js')
+    link(href='sb-admin/vendor/font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
+    style.
+      body {
+        background: #eee !important;
+      }
+
+      .wrapper {
+        margin-top: 80px;
+        margin-bottom: 80px;
+      }
+
+      .form-signin {
+        max-width: 380px;
+        padding: 15px 35px 45px;
+        margin: 0 auto;
+        background-color: #fff;
+        border: 1px solid rgba(0,0,0,0.1);
+      }
+
+  body
+    .container
+      .wrapper
+        form.form-signin(action='/login', method='POST')
+          h2.form-signin-heading(align='center', style="margin-bottom: 30px; margin-top: 20px;") Please Login
+          input.form-control(type='text', name='username', placeholder='Username', required='')
+          input.form-control(type='password', name='password', placeholder='Password', required='', style='margin-top: 20px')
+          br
+          a(href='/forgot', style='margin-bottom: 20px;') Forgot Password?
+          br
+          br
+          button.btn.btn-lg.btn-primary.btn-block(type='submit') Login
+          p(align='center', style='margin-top: 20px')
+            | Don't have an account? Please 
+            a(href='/sign-up', align='center' ,style='margin-bottom: 10px;') Sign up.
+            

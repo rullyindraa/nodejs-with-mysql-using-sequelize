@@ -1,0 +1,118 @@
+doctype html
+html(lang='en')
+
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js')
+    link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')
+    
+    title Student Database
+
+  body#page-top.fixed-nav.sticky-footer
+    include includes/navbar.pug
+    .content-wrapper
+      .container
+        // Breadcrumbs
+        ol.breadcrumb
+          li.breadcrumb-item
+            a(href='/') Dashboard
+          li.breadcrumb-item.active Student List
+        .card.mb-3
+          .card-header
+            i.fa.fa-table
+            |  Student List
+          .card-body
+            .table-responsive
+              table.table
+                form(action='/filter/', method='GET')
+                  .form-row
+                    .col-5
+                      .form-group
+                        input.form-control(type='text', placeholder='Keywords', name='keywords', value=keywords)
+                    .col-3
+                      .form-group
+                        select.form-control(name="orderby")
+                          option(name='student_id', value="student_id") Student ID
+                          option(name='name', value="name") Name
+                          option(name='address', value="address") Address
+                          option(name='major', value="major") Major
+                          option(name='student_email', value="student_email") Student Email
+                    .col-3
+                      .form-group
+                        select.form-control(name="sort")
+                          option(name='asc', value="ASC") ASC
+                          option(name='desc', value="DESC") DESC
+                    .col-1
+                      input.btn.btn-dark(type='submit', value='Filter')
+                thead
+                  tr
+                    th Student ID
+                    th Admission Date
+                    th Name
+                    th Address
+                    th Date of Birth
+                    th Gender
+                    th Major
+                    th Student Email
+                    th Action
+                tbody
+                  for student in data
+                    tr
+                      td= student.student_id
+                      td= moment(student.admission_date).format('DD-MM-YYYY')
+                      td= student.name
+                      td= student.address
+                      td= moment(student.date_of_birth).format('DD-MM-YYYY')
+                      - var studgender = student.gender
+                      if studgender === 'M'
+                        td= 'Male'
+                      else
+                        td= 'Female'
+                      td= student.major
+                      td= student.student_email
+                      td
+                        a(href='/students/'+student.student_id)
+                          button.btn.btn-success.btn-sm(type='button')
+                            i.fa.fa-pencil
+                        a(href='#')
+                          button.btn.btn-danger.btn-sm(type='button', onclick='hapus('+student.student_id+')')
+                            i.fa.fa-trash
+
+            // Modal
+            #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+              .modal-dialog(role='document')
+                .modal-content
+                  .modal-header
+                    h5#exampleModalLabel.modal-title Delete Student
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                      span(aria-hidden='true') ×
+                  .modal-body
+                    | Are you sure you want to delete?
+                  .modal-footer
+                    button.btn.btn-danger(type='button', onclick='deleteStudent()') Delete
+                    button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
+
+            script(type='text/javascript').
+              function hapus (e) {
+                window.idStudent = e;
+                $("#myModal").modal('show');
+              }
+              function deleteStudent(){
+                var id = window.idStudent;
+                $.ajax({
+                  url:'/students/delete/'+id,
+                  type:'POST',
+                  success : function (respon) {
+                  setTimeout(function() {$("#myModal").modal('hide');}, 1000);
+                  location.reload();
+                  }
+                })
+              }
+

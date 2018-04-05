@@ -1,0 +1,83 @@
+doctype html
+html(lang='en')
+
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='description', content='')
+    meta(name='author', content='')
+
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl', crossorigin='anonymous')
+
+    script(type='text/javascript', src='https://www.gstatic.com/charts/loader.js')
+    script(type='text/javascript', src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+    script(type='text/javascript').
+    
+      google.charts.load('current', {'packages':['corechart']});
+
+      google.charts.setOnLoadCallback(drawChart);
+        
+      function drawChart() { 
+        
+        var data_gender_ratio = new google.visualization.arrayToDataTable(!{obj_gender});
+
+        var options_gender_ratio = {'title':'Gender Ratio of Students',
+                       'width':1000,
+                       'height':600};
+
+
+        var chart_gender_ratio = new google.visualization.PieChart(document.getElementById('gender_chart'));
+        
+        chart_gender_ratio.draw(data_gender_ratio, options_gender_ratio);
+
+        var data_student = new google.visualization.arrayToDataTable(!{obj_student});
+
+        var options_student = {'title':'Total of Students',
+                       'width':1000,
+                       'height':600};
+
+        var chart_student = new google.visualization.LineChart(document.getElementById('student_chart'));
+        chart_student.draw(data_student, options_student);
+      }
+
+    title Student Database
+    
+  body#page-top.fixed-nav.sticky-footer
+    include includes/navbar.pug
+    .content-wrapper
+      .container
+        // Breadcrumbs
+        ol.breadcrumb
+          li.breadcrumb-item
+            a(href='/') Dashboard
+          li.breadcrumb-item.active Statistics
+        .card.mb-3
+          .card-header
+            i.fa.fa-pie-chart
+            |  Gender Ratio
+          .card-body
+            #gender_chart.mt-4.items-center
+        .card.mb-3
+          .card-header
+            i.fa.fa-line-chart
+            |  Student Chart
+          .card-body
+            form(action='/students/statistics', method='GET')
+              .form-row
+                .col-2
+                  .form-group
+                    select#year.form-control(name="year")
+                      option#year(name="year", value="2018") 2018
+                      option#year(name="year", value="2017") 2017
+                      option#year(name="year", value="2016") 2016
+                      // option#year(name="year", value="2015") 2015
+                      // option#year(name="year", value="2014") 2014
+                .col-1
+                  input.btn.btn-dark(type='submit', value='Search')
+                      
+            #student_chart.mt-4.items-center
