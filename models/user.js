@@ -17,7 +17,7 @@ module.exports = function(sequelize, Sequelize) {
     },
     password: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     reset_pwd_token: {
       type: Sequelize.STRING

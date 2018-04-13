@@ -9,8 +9,6 @@ const moment            = require('moment');
 app.locals.moment       = require('moment');
 const router            = express.Router();
 
-//router.use(isAutheticated);
-
 router.get('/', function(req, res) {
   var studentList = [];
   con.query('SELECT * FROM students', function(err, rows, fields) {
