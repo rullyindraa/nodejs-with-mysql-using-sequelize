@@ -1,0 +1,47 @@
+doctype html
+html(lang='en')
+  head
+    title Two Factor Authentication
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js')
+    style.
+      body {
+        background: #eee !important;
+      }
+
+      .wrapper {
+        margin-top: 80px;
+        margin-bottom: 80px;
+      }
+
+      .form-signin {
+        max-width: 380px;
+        padding: 15px 35px 45px;
+        margin: 0 auto;
+        background-color: #fff;
+        border: 1px solid rgba(0,0,0,0.1);
+      }
+
+  body
+    .container
+      .wrapper
+        form.form-signin(action='/two-factor-authentication', method='POST')
+          - if(error) {
+            .alert.alert-danger #{error}
+          - }
+          h2.form-signin-heading(align='center', style="margin-bottom: 30px; margin-top: 20px;") Two Factor Authentication
+          | Enter the 6-digit code from your code generator or third-party app below.
+          br
+          br
+          input.form-control(type='text', name='username', placeholder='Username', value=username, readonly)
+          input.form-control(type='text', name='token', placeholder='Token', value=token, required='', style='margin-top: 20px')
+          br
+          button.btn.btn-lg.btn-primary.btn-block(type='submit') Verify
+          br
+          p(align='center')
+            a(href='/login') Back to Login
+            

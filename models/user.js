@@ -19,10 +19,22 @@ module.exports = function(sequelize, Sequelize) {
       type: Sequelize.STRING,
       allowNull: true
     },
-    reset_pwd_token: {
+    twofa:{
+      type: Sequelize.ENUM('enable', 'disable'),
+      allowNull: true
+    },
+    twofa_secret:{
+      type: Sequelize.STRING,
+      allowNull: true
+    },
+    qr_url:{
+      type: Sequelize.STRING,
+      allowNull: true
+    },
+    email_token: {
       type: Sequelize.STRING
     },
-    reset_pwd_exp: {
+    token_exp: {
       type: Sequelize.DATE
     }
   });

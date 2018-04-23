@@ -1,0 +1,65 @@
+doctype html
+html(lang='en')
+  head
+    title Complete Registration
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js')
+    link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')
+    script.
+      var matchpwd = function() {
+        if(document.getElementById('password').value ==
+        document.getElementById('confirm_pwd').value) {
+          document.getElementById('message').style.color = 'green';
+          document.getElementById('message').innerHTML = 'Password Match';
+        } else {
+          document.getElementById('message').style.color = 'red';
+          document.getElementById('message').innerHTML = 'Password Not Match';
+        }
+      }
+
+    style.
+      body {
+        background: #eee !important;
+      }
+
+      .wrapper {
+        margin-top: 80px;
+        margin-bottom: 80px;
+      }
+
+      .form-signin {
+        max-width: 380px;
+        padding: 15px 35px 45px;
+        margin: 0 auto;
+        background-color: #fff;
+        border: 1px solid rgba(0,0,0,0.1);
+      }
+
+  body
+    .container
+      .wrapper
+        form.form-signin(method='POST')
+          h2.form-signin-heading(align='center', style="margin-bottom: 30px; margin-top: 20px;") Sign Up
+          input.form-control(type='email', name='email', placeholder='Email', value=semail, readonly)
+          input.form-control(type='text', name='username', placeholder='Username', style='margin-top: 20px', value=susername, readonly)
+          input.form-control(type='password', name='password', placeholder='Password', style='margin-top: 20px', onkeyup='matchpwd();')
+          input#confirm_pwd.form-control(type='password', name='confirmpassword', placeholder='Confirm Password', style='margin-top: 20px', onkeyup='matchpwd();')
+          if messages.error
+            .alert.alert-danger(style="margin-top: 30px;")
+              div= messages.error
+          if messages.info
+            .alert.alert-info(style="margin-top: 30px;")
+              div= messages.info
+          if messages.success
+            .alert.alert-success(style="margin-top: 30px;")
+              div= messages.success
+          br
+          button.btn.btn-lg.btn-primary.btn-block(type='submit') Register
+          br
+          p(align='center')
+            | Already have an account? 
+            a(href='/login') Sign In

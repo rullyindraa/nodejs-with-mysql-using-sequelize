@@ -1,0 +1,91 @@
+doctype html
+html(lang='en')
+
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css')
+    link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')
+    link(href='https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css', rel='stylesheet')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js')
+    script(src='https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js')
+    
+    title Setting
+
+  body#page-top.fixed-nav.sticky-footer
+    include includes/navbar.pug
+    .content-wrapper
+      .container
+        // Breadcrumbs
+        ol.breadcrumb(style='margin-top: 20px')
+          li.breadcrumb-item
+            a(href='/') Dashboard
+          li.breadcrumb-item.active Setting
+        .card
+          .card-header
+            i.fa.fa-lock
+            |  Security 
+          .card-body(align='center')
+            |
+            form#form(action='/setting', method='POST')
+              - if(failed) {
+              .alert.alert-danger #{failed}
+              - }
+              - if(valid) {
+              .alert.alert-success #{valid}
+              - }
+              .h3(align= 'center') Setting Two Factor Authentication
+              | You can use Code Generator to generate login codes. Set up a third-party app to generate codes.
+              br
+              .form-check.form-check-inline(style='margin-top: 20px')
+                input#enable.form-check-input(type='radio', name='twofa', value='enable', checked=stwofa=='enable', onclick='this.form.submit();')
+                label.form-check-label(for='enable') Enable
+              .form-check.form-check-inline
+                input#disable.form-check-input(type='radio', name='twofa', value='disable', checked=stwofa=='disable', onclick='clicked(event)')
+                label.form-check-label(for='disable') Disable
+
+            script(type='text/javascript').
+
+              function clicked(e) {
+                if(!confirm('Are you sure?'))e.preventDefault();
+                else {document.getElementById('form').submit()}
+              }
+            
+            - if(enable) 
+              hr
+              .h6(style='margin-bottom: 20px', align='center') Scan QR Code below or type secret key into the App.
+              form.justify-content-center
+                .row.form-group
+                  label.control-label.col-lg-3.col-md-3.col-sm-3.col-xs-3(for='QR Code') QR Code:
+                  .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                    img.img-thumbnail(src=qr_code, alt='QR Code')
+                .row.form-group
+                  label.col-lg-3.col-md-3.col-sm-3.col-xs-3(for='Secret Key') Secret Key:
+                  label.col-lg-6.col-md-6.col-sm-6.col-xs-6.text-danger.h7(for='Secret Key') #{enable}
+              hr
+              .h6(style='margin-top: 30px') To confirm the third-party app is set up correctly, enter the security code that appears on your phone.
+              form.justify-content-center(action='/verify', style='margin-top: 30px')
+                .row.form-group
+                  label.control-label.col-lg-3.col-md-3.col-sm-3.col-xs-3(for='token') Security Code
+                  .col-lg-3.col-md-3.col-sm-3.col-xs-3
+                    input#token.form-control(type='text', placeholder='Enter Security Code', name='token')
+                input.btn.btn-primary(type='submit', style='margin-top: 10px', value='Verify')
+            
+              - if(valid) 
+                form(action='/verify', method='POST')
+                  input.btn.btn-dark(type='submit', style='margin-top: 10px', value='Save Changes')
+          
+          script(type='text/javascript').
+            function verify() {
+              $.ajax ({
+                url: '/verify',
+                type: 'GET'
+              })
+            }
+        
+
