@@ -5,6 +5,7 @@ This is a simple project about Student Database using
  - `Express` as Node.js Web Framework.
  - `Google Chart` to draw statistics.
  - `SendGrid` as email delivery service.
+ - `node-2fa` for two factor authentication.
 
 ## Feature
 1. Authentication using `passport`.
@@ -12,6 +13,7 @@ This is a simple project about Student Database using
 3. Form validations.
 4. Filter by keywords, ID, name, address, and email of students.
 5. Statistics about gender ratio and total of students per Month.
+6. Two factor authentication.
 
 ## Requirements
  - Node.js (latest version).
