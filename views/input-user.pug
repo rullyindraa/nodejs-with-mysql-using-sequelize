@@ -37,13 +37,13 @@ html(lang='en')
     .content-wrapper
       .container
         // Breadcrumbs
-        ol.breadcrumb
+        ol.breadcrumb(style='margin-top: 20px')
           li.breadcrumb-item
             a(href='/') Dashboard
-          li.breadcrumb-item.active Input New User
+          li.breadcrumb-item.active Users
         .card.mb-3
           .card-header
-            i.fa.fa-check-square-o
+            i.fa.fa-user-plus
             |  Input New User
           .card-body
             form.needs-validation(action='/users/input', method='POST', novalidate='')

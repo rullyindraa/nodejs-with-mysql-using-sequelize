@@ -1,20 +1,44 @@
-nav.navbar.navbar-expand-lg.bg-dark.navbar-dark(style= 'margin-bottom: 30px;')
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
   a.navbar-brand(href='#')
-  ul.navbar-nav
-    li.nav-item
-      a.nav-link(href='/') Dashboard
-    li.nav-item
-      a.nav-link(href='/students/statistics?year=2018') Statistics
-    li.nav-item.dropdown
-      a#navbardrop.nav-link.dropdown-toggle(href='#', data-toggle='dropdown')
-        | Students
-      .dropdown-menu
-        a.dropdown-item(href='/students') Students List
-        a.dropdown-item(href='/students/input') Input New Student
-    li.nav-item.dropdown
-      a#navbardrop.nav-link.dropdown-toggle(href='#', data-toggle='dropdown')
-        | Users
-      .dropdown-menu
-        a.dropdown-item(href='/users/input') Input New User
-    li.nav-item
-      a.nav-link(href='/logout') Logout
+  button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+    span.navbar-toggler-icon
+  #navbarSupportedContent.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto
+      li.nav-item
+        a.nav-link(href='/') 
+          i.fa.fa-home
+          |  Dashboard
+      li.nav-item
+        a.nav-link(href='/students/statistics?year=2018') 
+          i.fa.fa-line-chart
+          |  Statistics
+      li.nav-item.dropdown
+        a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+          i.fa.fa-users
+          |  Students
+        .dropdown-menu(aria-labelledby='navbarDropdown')
+          a.dropdown-item(href='/students') 
+            i.fa.fa-table
+            |  Student List
+          a.dropdown-item(href='/students/input') 
+            i.fa.fa-user-plus
+            |  Input New Student
+      li.nav-item.dropdown
+        a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+          i.fa.fa-user
+          |  Users
+        .dropdown-menu(aria-labelledby='navbarDropdown')
+          a.dropdown-item(href='/users/input') 
+            i.fa.fa-user-plus
+            |  Input New User
+      li.nav-item.dropdown
+        a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+          i.fa.fa-cogs
+          |  Setting
+        .dropdown-menu(aria-labelledby='navbarDropdown')
+          a.dropdown-item(href='/setting') 
+            i.fa.fa-lock
+            |  Security
+          a.dropdown-item(href='/logout') 
+            i.fa.fa-sign-out
+            |  Logout

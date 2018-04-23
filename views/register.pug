@@ -1,7 +1,7 @@
 doctype html
 html(lang='en')
   head
-    title Sign up to Student Database
+    title Register into Student Database
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css')
@@ -31,9 +31,23 @@ html(lang='en')
   body
     .container
       .wrapper
-        form.form-signin(method='POST')
+        form.form-signin(action='/register', method='POST')
           h2.form-signin-heading(align='center', style="margin-bottom: 30px; margin-top: 20px;") Sign Up
-          input.form-control(type='password', name='password', placeholder='Password', required='', style='margin-top: 20px')
+          input.form-control(type='email', name='email', placeholder='Email', required='')
+          input.form-control(type='text', name='username', placeholder='Username', required='', style='margin-top: 20px')
+          if messages.error
+            .alert.alert-danger(style="margin-top: 30px;")
+              div= messages.error
+          if messages.info
+            .alert.alert-info(style="margin-top: 30px;")
+              div= messages.info
+          if messages.success
+            .alert.alert-success(style="margin-top: 30px;")
+              div= messages.success
           br
-          button.btn.btn-lg.btn-primary.btn-block(type='submit') Set Password
+          button.btn.btn-lg.btn-primary.btn-block(type='submit') Register
+          br
+          p(align='center')
+            | Already have an account? 
+            a(href='/login') Sign In
 

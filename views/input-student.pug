@@ -37,15 +37,15 @@ html(lang='en')
     .content-wrapper
       .container
         // Breadcrumbs
-        ol.breadcrumb
+        ol.breadcrumb(style='margin-top: 20px')
           li.breadcrumb-item
             a(href='/') Dashboard
           li.breadcrumb-item
-            a(href='/students') Student List
+            a(href='/students') Students
           li.breadcrumb-item.active Input New Student
         .card.mb-3
           .card-header
-            i.fa.fa-check-square-o
+            i.fa.fa-user-plus
             |  Input New Student
           .card-body
             form.needs-validation(action='/students/input', method='POST', novalidate='')

@@ -8,7 +8,6 @@ html(lang='en')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js')
-    link(href='sb-admin/vendor/font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
     style.
       body {
         background: #eee !important;
@@ -30,7 +29,7 @@ html(lang='en')
   body
     .container
       .wrapper
-        form.form-signin(action='/login', method='POST')
+        form.form-signin(action='/sign-in', method='GET')
           h2.form-signin-heading(align='center', style="margin-bottom: 30px; margin-top: 20px;") Please Login
           input.form-control(type='text', name='username', placeholder='Username', required='')
           input.form-control(type='password', name='password', placeholder='Password', required='', style='margin-top: 20px')
@@ -40,6 +39,6 @@ html(lang='en')
           br
           button.btn.btn-lg.btn-primary.btn-block(type='submit') Login
           p(align='center', style='margin-top: 20px')
-            | Don't have an account? Please 
-            a(href='/sign-up', align='center' ,style='margin-bottom: 10px;') Sign up.
+            | Don't have an account? 
+            a(href='/register', align='center' ,style='margin-bottom: 10px;') Register Now.
             

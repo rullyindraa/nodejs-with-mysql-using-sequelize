@@ -20,23 +20,23 @@ html(lang='en')
     .content-wrapper
       .container
         // Breadcrumbs
-        ol.breadcrumb
+        ol.breadcrumb(style='margin-top: 20px')
           li.breadcrumb-item
             a(href='/') Dashboard
-          li.breadcrumb-item.active Student List
+          li.breadcrumb-item.active Students
         .card.mb-3
           .card-header
             i.fa.fa-table
             |  Student List
           .card-body
-            .table-responsive
-              table.table
+            .table-responsive-lg
+              table.table.col-lg-12.col-md-12.col-sm-12.col-xs-12
                 form(action='/filter/', method='GET')
                   .form-row
-                    .col-5
+                    .col-lg-5.col-md-5.col-sm-5.col-xs-5
                       .form-group
                         input.form-control(type='text', placeholder='Keywords', name='keywords', value=keywords)
-                    .col-3
+                    .col-lg-3.col-md-3.col-sm-3.col-xs-3
                       .form-group
                         select.form-control(name="orderby")
                           option(name='student_id', value="student_id") Student ID
@@ -44,13 +44,15 @@ html(lang='en')
                           option(name='address', value="address") Address
                           option(name='major', value="major") Major
                           option(name='student_email', value="student_email") Student Email
-                    .col-3
+                    .col-lg-3.col-md-3.col-sm-3.col-xs-3
                       .form-group
                         select.form-control(name="sort")
                           option(name='asc', value="ASC") ASC
                           option(name='desc', value="DESC") DESC
-                    .col-1
+                    .col-lg-1.col-md-1.col-sm-1.col-xs-1
                       input.btn.btn-dark(type='submit', value='Filter')
+                    br
+                    br
                 thead
                   tr
                     th Student ID
